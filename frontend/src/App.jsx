@@ -1,26 +1,22 @@
 import './App.css'
-import donate from './assets/donate3.webp'
-import donate2 from './assets/donate2.jpg'
-import donate3 from './assets/donate3.webp'
-import donate4 from './assets/donate4.jpg'
-import positive from './assets/positive.avif'
-export default function App(){
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import Home from './components/Home';
+import Login from './components/Login'
+import Register from './components/Register'
+import Dashboard from './components/Dashboard'
+import About from './components/About'
+
+function App(){
     return(
-        <div className='home'>
-            <div className="left">
-                <h1>Welcome to LeftOverLink!</h1>
-                The food you waste could be someone’s only meal. Let's make the World better for each soul!
-                <div className="btns">
-                    <button>Donor Registration</button>
-                    <button>NGO Registartion</button>
-                </div>
-                <img src={donate} alt="" style={{height: 'auto',width:'450px'}}/>
-            </div>
-            <div className="right">
-                <h1 style={{fontSize:'30px'}}>''One Link Can End Hunger. Let's create it with LeftOverLink''</h1>
-                <button>Learn More About Us</button>
-                <img src={donate4} alt="" style={{height:'auto',width:'90%',marginTop:'20px'}}/>
-            </div>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/about" element={<About />} />
+            </Routes>
+        </Router>
     );
 }
+export default App;
