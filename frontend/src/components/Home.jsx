@@ -1,4 +1,4 @@
-
+import "./styles/Home.css"
 import { useNavigate } from "react-router-dom";
 import donate from '../assets/donate3.webp'
 export default function Home(){
@@ -9,8 +9,8 @@ export default function Home(){
                 <h1>Welcome to LeftOverLink!</h1>
                 The food you waste could be someone’s only meal. Let's make the World better for each soul!
                 <div className="btns">
-                    <button className='donorbtn' onClick={()=>navigate('/login')}>Donor Registration</button>
-                    <button className='ngobtn' onClick={()=>navigate('/register')}>NGO Registartion</button>
+                    <button className='donorbtn' onClick={()=>navigate('/donor')}>Donor DashBoard</button>
+                    <button className='ngobtn' onClick={()=>navigate('/ngo')}>NGO DashBoard</button>
                 </div>
                 <img src={donate} alt="" style={{height: 'auto',width:'500px'}}/>
             </div>

@@ -1,0 +1,73 @@
+.home{
+  height: 100vh;
+  width: 100%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+h1{
+  font-size: 48px;
+}
+.content{
+  height: 100px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.left{
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: 	#F2EDE5;
+}
+.right{
+  height: 100%;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  background-image: url("../../assets/image.jpg");
+  background-size: cover;
+  color:white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.btns{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #FF7043;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  height: 40px;
+}
+.learnmorebtn{
+  background-color: #1976D2;
+  margin-top: 320px;
+}
+.learnmorebtn:hover {
+  background-color: #1565C0;
+}
+.donorbtn{
+  background-color:#FF7043;
+  color: white;
+}
+.donorbtn:hover{
+  background-color: #ff5724;
+}
+.ngobtn{
+  background-color: #4CAF50;
+  color: white;
+}
+.ngobtn:hover {
+  background-color: #388E3C;
+}
