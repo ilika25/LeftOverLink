@@ -3,11 +3,11 @@ export default function LoginDonor(){
     return(
         <div className="login">
             <form>
-                <input type="text" placeholder="Username"></input>
-                <input type= "password" placeholder="Password"></input>
+                <input type="email" placeholder="email" autoComplete="email" name="email" />
+                <input type= "password" placeholder="Password" name="password"></input>
                 <button type="submit">Login</button>
             </form>
-            <Link to="/registerdonor">Don't have an account?Register Now</Link>
+            <Link to="/donor/register">Don't have an account?Register Now</Link>
         </div>
     );
 }

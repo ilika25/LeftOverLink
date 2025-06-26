@@ -4,7 +4,7 @@ export default function Donor(){
     return(
         <>
         <h1>Welcome to the Donor Community</h1>
-        <button onClick={()=>navigate('/logindonor')}>Login</button>
+        <button onClick={()=>navigate('/donor/login')}>Login</button>
         </>
     );
 }

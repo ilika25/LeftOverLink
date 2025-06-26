@@ -5,7 +5,7 @@ export default function Ngo(){
         <>
         <h1>Welcome to the NGO Community</h1>
         <h4>Click on the register button to register your ngo with our site, If already registered, login</h4>
-        <button onClick={()=>navigate('/loginngo')}>Login</button>
+        <button onClick={()=>navigate('/ngo/login')}>Login</button>
         </>
     );
 }

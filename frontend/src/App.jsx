@@ -14,11 +14,11 @@ function App(){
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/logindonor" element={<LoginDonor />} />
-                <Route path="/registerdonor" element={<RegisterDonor />} />
+                <Route path="/donor/login" element={<LoginDonor />} />
+                <Route path="/donor/register" element={<RegisterDonor />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/loginngo" element={<LoginNgo />} />
-                <Route path= "/registerngo" element={<RegisterNgo />} />
+                <Route path="/ngo/login" element={<LoginNgo />} />
+                <Route path= "/ngo/register" element={<RegisterNgo />} />
                 <Route path= "/donor" element= {<Donor />} />
                 <Route path= "/ngo" element= {<Ngo />} />
             </Routes>
