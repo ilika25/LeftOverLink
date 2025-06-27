@@ -10,6 +10,7 @@ import Donor from './components/Donor'
 import Ngo from './components/Ngo'
 import DonorDashboard from './components/DonorDashboard'
 import NgoDashboard from './components/NgoDashboard'
+import Donationform from './components/Donationform'
 function ProtectedRoute({children}){
     const token= localStorage.getItem('token');
     return token?children:<Navigate to="/donor/login" />
@@ -32,6 +33,7 @@ function App(){
                 <Route path= "/ngo/dashboard" element= {<ProtectedRoute2><NgoDashboard /></ProtectedRoute2>} />
                 <Route path= "/donor" element= {<Donor />} />
                 <Route path= "/ngo" element= {<Ngo />} />
+                <Route path= "/donationform" element={<Donationform />} />
             </Routes>
         </Router>
     );

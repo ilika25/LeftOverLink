@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import api from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function DonorDashboard(){
     const [donor,setDonor]= useState(null);
@@ -24,6 +25,8 @@ export default function DonorDashboard(){
     return (
         <>
         <h1>Welcome,{donor.DonorName}!</h1>
+        <h3>Ready to make a difference? Fill out the food donation form now!</h3>
+        <button onClick={()=>navigate('/donationform')}>Donate Now</button>
         </>
     )
 }
