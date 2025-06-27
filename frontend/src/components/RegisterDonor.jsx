@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 export default function RegisterDonor(){
     const [form,setForm]= useState({
         DonorName:'',password:'',organisation:'',
-        phone:'',email:'',
+        phone:'',email:'',address: ''
     });
     const navigate= useNavigate();
     const handleChange= (e) => {
