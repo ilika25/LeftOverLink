@@ -51,7 +51,7 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({error:'Password do not match'});
         }
         const token= jwt.sign(
-            {id:donor._id,email:donor.email},
+            {_id:donor._id,email:donor.email},
             SECRET_KEY,
             {expiresIn: "2h"}
         );

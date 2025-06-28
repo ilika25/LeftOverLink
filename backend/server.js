@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/donor',require('./routes/authdonor'));
 app.use('/ngo',require('./routes/authngo'));
+app.use('/donation',require('./routes/donationRoutes'));
 
 const port= 3000;
 app.listen(port,()=>console.log(`Server listening on port ${port}`));

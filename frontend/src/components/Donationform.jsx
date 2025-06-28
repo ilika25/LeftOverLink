@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Donationform(){
+    const navigate= useNavigate();
     const location= useLocation();
     const initialDonor= location.state?.donor;
     const [donor,setDonor]= useState(initialDonor||null); //data coming from the user dashboard
@@ -12,7 +13,7 @@ export default function Donationform(){
         quantity:"",
         pickupAddress:""
     });
-    const [image,setImage]= usestate(null);
+    const [image,setImage]= useState(null);
     useEffect(()=>{
         if(!donor){
             const token= localStorage.getItem("token");
@@ -25,7 +26,7 @@ export default function Donationform(){
                     setDonor(res.data);
                 }catch(err){
                     alert("Session expired! Please login again");
-                    Navigate("/donor/login");
+                    navigate("/donor/login");
                 }
             };
             fetchDonor();
