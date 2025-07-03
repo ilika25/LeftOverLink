@@ -9,7 +9,7 @@ const verifyToken = require('../middleware/verifyToken');
 
 router.get('/profile', verifyToken, async (req, res) => {
   try {
-    const ngo = await Ngo.findById(req.user.id).select('-password');
+    const ngo = await Ngo.findById(req.user._id).select('-password');
     if (!ngo) return res.status(404).json({ error: 'Ngo not found' });
     res.status(200).json(ngo);
   } catch (err) {
@@ -40,30 +40,41 @@ router.post('/register',async(req,res)=>{
         res.status(500).json({error:'Server error'});
     }
 });
-router.post('/login',async(req,res)=>{
-    let {NgoName,email,password}= req.body;
-    try{
-        NgoName = NgoName.trim().toLowerCase();
-        email = email.trim().toLowerCase();
-        const ngo= await Ngo.findOne({email});
-        if(!ngo){
-            return res.status(400).json({error:'Ngo not found'});
-        }
-        const isMatch= await bcrypt.compare(password,ngo.password);
-        if(!isMatch){
-            return res.status(400).json({error:'Password do not match'});
-        }
-        if(NgoName!==ngo.NgoName.toLowerCase()){
-            return res.status(400).json({error:"The Ngo Name is incorrect"});
-        }
-        const token= jwt.sign(
-            {id:ngo._id,email:ngo.email,NgoName:ngo.NgoName},
-            SECRET_KEY,
-            {expiresIn: "2h"}
-        );
-        res.status(200).json({message:'Login Successful',token});
-    }catch(err){
-        res.status(500).json({error:'Server error'});
+router.post('/login', async (req, res) => {
+  let { NgoName, email, password } = req.body;
+  try {
+    NgoName = NgoName.trim().toLowerCase();
+    email = email.trim().toLowerCase();
+
+    const ngo = await Ngo.findOne({ email });
+    if (!ngo) {
+      return res.status(400).json({ error: 'Ngo not found' });
     }
+
+    const isMatch = await bcrypt.compare(password, ngo.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Password does not match' });
+    }
+
+    if (NgoName !== ngo.NgoName.toLowerCase()) {
+      return res.status(400).json({ error: 'The Ngo Name is incorrect' });
+    }
+
+    const token = jwt.sign(
+      {
+        _id: ngo._id,
+        email: ngo.email,
+        NgoName: ngo.NgoName,
+        role: "ngo"
+      },
+      SECRET_KEY,
+      { expiresIn: "2h" }
+    );
+    res.status(200).json({ message: 'Login Successful', token });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 module.exports= router;

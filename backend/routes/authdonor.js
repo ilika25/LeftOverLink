@@ -9,7 +9,7 @@ const verifyToken = require('../middleware/verifyToken');
 
 router.get('/profile', verifyToken, async (req, res) => {
   try {
-    const donor = await Donor.findById(req.user.id).select('-password');
+    const donor = await Donor.findById(req.user._id).select('-password');
     if (!donor) return res.status(404).json({ error: 'Donor not found' });
     res.status(200).json(donor);
   } catch (err) {
@@ -51,7 +51,7 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({error:'Password do not match'});
         }
         const token= jwt.sign(
-            {_id:donor._id,email:donor.email},
+            {_id:donor._id.toString(),email:donor.email,role:"donor"},
             SECRET_KEY,
             {expiresIn: "2h"}
         );
