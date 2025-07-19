@@ -16,7 +16,9 @@ const verifyToken = (req, res, next) => {
         req.user = {
             _id:decoded._id,
             email: decoded.email,
-            role: decoded.role
+            role: decoded.role,
+            DonorName: decoded.DonorName||null,
+            NgoName: decoded.NgoName||null  
         };
         next();
     } catch (err) {

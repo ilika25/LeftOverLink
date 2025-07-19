@@ -42,22 +42,23 @@ router.post('/register',async(req,res)=>{
 });
 router.post('/login', async (req, res) => {
   let { NgoName, email, password } = req.body;
+
   try {
     NgoName = NgoName.trim().toLowerCase();
     email = email.trim().toLowerCase();
 
     const ngo = await Ngo.findOne({ email });
     if (!ngo) {
-      return res.status(400).json({ error: 'Ngo not found' });
+      return res.status(400).json({ error: 'NGO not found' });
     }
 
     const isMatch = await bcrypt.compare(password, ngo.password);
     if (!isMatch) {
-      return res.status(400).json({ error: 'Password does not match' });
+      return res.status(400).json({ error: 'Incorrect password' });
     }
 
     if (NgoName !== ngo.NgoName.toLowerCase()) {
-      return res.status(400).json({ error: 'The Ngo Name is incorrect' });
+      return res.status(400).json({ error: 'Incorrect NGO Name' });
     }
 
     const token = jwt.sign(
@@ -70,11 +71,20 @@ router.post('/login', async (req, res) => {
       SECRET_KEY,
       { expiresIn: "2h" }
     );
-    res.status(200).json({ message: 'Login Successful', token });
+
+    // ✅ Return token and optionally role
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      role: 'ngo',
+      NgoName: ngo.NgoName
+    });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    console.error("NGO Login Error:", err.message);
+    res.status(500).json({ error: 'Server error during NGO login' });
   }
 });
+
+module.exports = router;
 module.exports= router;

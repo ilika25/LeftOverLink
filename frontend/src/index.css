@@ -1,7 +1,13 @@
 body{
-  overflow: hidden;
   font-family: 'Georgia';
 }
 h1{
   font-size: 46px;
+}.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scroll{
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }

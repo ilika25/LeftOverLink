@@ -39,25 +39,44 @@ router.post('/register',async(req,res)=>{
         res.status(500).json({error:'Server error'});
     }
 });
-router.post('/login',async(req,res)=>{
-    const {email,password}= req.body;
-    try{
-        const donor= await Donor.findOne({email});
-        if(!donor){
-            return res.status(400).json({error:'Donor not found'});
-        }
-        const isMatch= await bcrypt.compare(password,donor.password);
-        if(!isMatch){
-            return res.status(400).json({error:'Password do not match'});
-        }
-        const token= jwt.sign(
-            {_id:donor._id.toString(),email:donor.email,role:"donor"},
-            SECRET_KEY,
-            {expiresIn: "2h"}
-        );
-        res.status(200).json({message:'Login Successful',token});
-    }catch(err){
-        res.status(500).json({error:'Server error'});
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const donor = await Donor.findOne({ email: email.trim().toLowerCase() });
+
+    if (!donor) {
+      return res.status(400).json({ error: 'Donor not found' });
     }
+
+    const isMatch = await bcrypt.compare(password, donor.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Incorrect password' });
+    }
+
+    const token = jwt.sign(
+      {
+        _id: donor._id,
+        email: donor.email,
+        DonorName: donor.DonorName,
+        role: 'donor'
+      },
+      SECRET_KEY,
+      { expiresIn: '2h' }
+    );
+
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      role: 'donor',
+      DonorName: donor.DonorName
+    });
+
+  } catch (err) {
+    console.error('Donor Login Error:', err.message);
+    res.status(500).json({ error: 'Server error during donor login' });
+  }
 });
+
+module.exports = router;
 module.exports= router;
